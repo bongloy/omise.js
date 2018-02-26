@@ -6,8 +6,8 @@ interface Config {
 }
 
 export var config: Config = {
-  vaultUrl: "https://vault.omise.co",
-  assetUrl: "https://cdn.omise.co",
-  cardHost: "https://cdn.omise.co",
-  cardUrl:  "https://cdn.omise.co/pay.html",
+  vaultUrl: "https://vault.bongloy.com",
+  assetUrl: "https://cdn.bongloy.com",
+  cardHost: "https://cdn.bongloy.com",
+  cardUrl:  "https://cdn.bongloy.com/pay.html",
 };

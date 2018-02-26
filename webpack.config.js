@@ -8,10 +8,10 @@ var CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 
-  entry: "./src/omise.ts",
+  entry: "./src/bongloy.ts",
 
   output: {
-    filename: "./dist/omise.js"
+    filename: "./dist/bongloy.js"
   },
 
   devtool: '#inline-source-map',

@@ -1,5 +1,5 @@
 #!/bin/sh
 
-rm src/omise.js
-rm src/omise/*.js
-rm src/omise/card/*.js
+rm src/bongloy.js
+rm src/bongloy/*.js
+rm src/bongloy/card/*.js

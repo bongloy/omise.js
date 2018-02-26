@@ -1,10 +1,10 @@
 /**
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
- * Mocha - Browser test Omise.js
+ * Mocha - Browser test Bongloy.js
  * -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
  */
 
-(function($, expect, OmiseCard, TO) {
+(function($, expect, BongloyCard, TO) {
 
 'use strict';
 
@@ -16,53 +16,53 @@ TO.silentMode();
  * Spec - Pay.js
  * --------------------------------------------------------
  */
-describe('OmiseCard - Control iframe app', function() {
+describe('BongloyCard - Control iframe app', function() {
 
-  var $omiseInjectIframeApp = null;
+  var $bongloyInjectIframeApp = null;
   var $testForm = null;
   var _frameWrapperId = '';
 
 
   before(function() {
-    $omiseInjectIframeApp = $(OmiseCard.Omise.frame.frameWrapper);
+    $bongloyInjectIframeApp = $(BongloyCard.Bongloy.frame.frameWrapper);
     $testForm = $('#test-form');
-    _frameWrapperId = OmiseCard.getIframeId();
+    _frameWrapperId = BongloyCard.getIframeId();
   });
 
 
-  it('Should found iframe app if omise script tag are visible', function() {
-    expect($omiseInjectIframeApp).to.have.length(1);
+  it('Should found iframe app if bongloy script tag are visible', function() {
+    expect($bongloyInjectIframeApp).to.have.length(1);
   });
 
 
-  it('Should auto generate button from omise script tag work properly', function(done) {
+  it('Should auto generate button from bongloy script tag work properly', function(done) {
     // don't show iframe app in test.
-    $omiseInjectIframeApp.css('opacity', 0)
+    $bongloyInjectIframeApp.css('opacity', 0)
       .find('iframe').on('load', function() {
         $testForm.find('button').trigger('click');
-        expect($omiseInjectIframeApp.css('display')).to.equal('block');
+        expect($bongloyInjectIframeApp.css('display')).to.equal('block');
         done();
       });
   });
 
 
-  it('Should get form element from omise script tag', function() {
-    expect(OmiseCard.payForm.nodeType).to.equal(1);
-    expect(OmiseCard.payForm.tagName).to.equal('FORM');
+  it('Should get form element from bongloy script tag', function() {
+    expect(BongloyCard.payForm.nodeType).to.equal(1);
+    expect(BongloyCard.payForm.tagName).to.equal('FORM');
   });
 
 
   it('Should get form element by selector properly (config - submit form target)', function() {
-    expect(OmiseCard.getFormBySelector('#test-form')).to.not.equal(null);
+    expect(BongloyCard.getFormBySelector('#test-form')).to.not.equal(null);
   });
 
 
   it('Should iframe app close properly', function(done) {
     setTimeout(function() {
-      OmiseCard.close();
+      BongloyCard.close();
 
       setTimeout(function() {
-        expect($omiseInjectIframeApp.css('display')).to.equal('none');
+        expect($bongloyInjectIframeApp.css('display')).to.equal('none');
         done();
       }, 250);
     }, 250);
@@ -70,29 +70,29 @@ describe('OmiseCard - Control iframe app', function() {
 
 
   it('Should remove iframe app properly', function() {
-    var frameWrapper = OmiseCard.removeInjectIframe();
-    $omiseInjectIframeApp = null;
+    var frameWrapper = BongloyCard.removeInjectIframe();
+    $bongloyInjectIframeApp = null;
     expect(frameWrapper).to.equal(null);
   });
 
 
   it('Should manual set configure', function() {
-    var config = OmiseCard.configure({
+    var config = BongloyCard.configure({
       publicKey: 'your_public_key_123456789',
-      logo: 'https://omise-cdn.s3.amazonaws.com/assets/dashboard/images/omise-only-logo.png',
+      logo: 'https://bongloy-cdn.s3.amazonaws.com/assets/dashboard/images/bongloy-only-logo.png',
       locationField: 'yes',
       submitFormTarget: '#form-target'
     });
     var result = {
       key: 'your_public_key_123456789',
-      image: 'https://omise-cdn.s3.amazonaws.com/assets/dashboard/images/omise-only-logo.png',
+      image: 'https://bongloy-cdn.s3.amazonaws.com/assets/dashboard/images/bongloy-only-logo.png',
       location: 'yes',
       formTarget: '#form-target'
     };
 
     expect(config).to.deep.equal(result);
 
-    config = OmiseCard.configure({
+    config = BongloyCard.configure({
       amount: 1234
     });
     result = {
@@ -125,11 +125,11 @@ describe('OmiseCard - Control iframe app', function() {
       buttonLabel: 'Test config button B'
     };
 
-    var resultA = OmiseCard.configureButton('#checkout-button-a', configA);
+    var resultA = BongloyCard.configureButton('#checkout-button-a', configA);
     expect(resultA.buttonId).to.equal('#checkout-button-a');
     expect(configA).to.deep.equal(resultA.configuration);
 
-    var resultB = OmiseCard.configureButton('#checkout-button-b', configB);
+    var resultB = BongloyCard.configureButton('#checkout-button-b', configB);
     expect(resultB.buttonId).to.equal('#checkout-button-b');
     expect(configB).to.deep.equal(resultB.configuration);
   });
@@ -137,11 +137,11 @@ describe('OmiseCard - Control iframe app', function() {
 
   it('Should not found iframe before attach (if not found script tag)', function(done) {
     // remove script tag.
-    $(OmiseCard.omiseScriptTag).remove();
+    $(BongloyCard.bongloyScriptTag).remove();
 
     expect(document.getElementById(_frameWrapperId)).to.equal(null);
 
-    OmiseCard.attach();
+    BongloyCard.attach();
 
     setTimeout(function() {
       expect(document.getElementById(_frameWrapperId)).to.not.equal(null);
@@ -151,7 +151,7 @@ describe('OmiseCard - Control iframe app', function() {
 
 
   it('Should custom button configure properly', function() {
-    OmiseCard.targetButtonConfig.forEach(function(config) {
+    BongloyCard.targetButtonConfig.forEach(function(config) {
       var $targetButton = $(config.buttonId);
       expect($targetButton.text()).to.equal(config.configuration.buttonLabel);
       expect($targetButton.data()).to.deep.equal(config.configuration);
@@ -163,14 +163,14 @@ describe('OmiseCard - Control iframe app', function() {
 
 /**
  * --------------------------------------------------------
- * Spec - Omise.js
+ * Spec - Bongloy.js
  * --------------------------------------------------------
  */
-describe('Omise.js - Data testing', function() {
+describe('Bongloy.js - Data testing', function() {
   var _windowMessageHandler;
 
   before(function() {
-    Omise.setPublicKey('pkey_test_54gujlsw2olh76emx9n');
+    Bongloy.setPublicKey('pkey_test_54gujlsw2olh76emx9n');
   });
 
   it('Should create token from card information properly', function(done) {
@@ -182,7 +182,7 @@ describe('Omise.js - Data testing', function() {
       security_code: '123'
     };
 
-    Omise.createToken('card', cardInfomation, function(code, resp) {
+    Bongloy.createToken('card', cardInfomation, function(code, resp) {
       expect(code).to.equal(200);
       expect(resp.object).to.equal('token');
       expect(typeof resp.id).to.equal('string');
@@ -199,7 +199,7 @@ describe('Omise.js - Data testing', function() {
       security_code: '092'
     };
 
-    Omise.createToken('card', cardInfomation, function(code, resp) {
+    Bongloy.createToken('card', cardInfomation, function(code, resp) {
       expect(code).to.equal(400);
       expect(resp.code).to.equal('invalid_card');
       expect(typeof resp.message).to.equal('string');
@@ -208,7 +208,7 @@ describe('Omise.js - Data testing', function() {
   });
 
   it('Should `sendTokenAndCloseFrame` work properly', function(done) {
-    var OmiseForm = Omise.createForm({});
+    var BongloyForm = Bongloy.createForm({});
     var mockToken = 'token_1234';
     var mockNote  = 'Note message';
     var _data = {};
@@ -218,7 +218,7 @@ describe('Omise.js - Data testing', function() {
     }
 
     window.addEventListener('message', _windowMessageHandler, false);
-    OmiseForm.sendTokenAndCloseFrame(mockToken, mockNote);
+    BongloyForm.sendTokenAndCloseFrame(mockToken, mockNote);
 
     // using `setTimeout` for change process order execute
     // need to test in this scope for test result.
@@ -239,6 +239,6 @@ describe('Omise.js - Data testing', function() {
 })(
   window.jQuery,
   window.chai.expect,
-  window.OmiseCard,
+  window.BongloyCard,
   window._TO_
 );

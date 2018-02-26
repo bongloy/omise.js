@@ -26,7 +26,7 @@ export class Frame {
     const self = this;
 
     this.client            = client;
-    this.frameWrapperId    = 'omise-inject-iframe-app';
+    this.frameWrapperId    = 'bongloy-inject-iframe-app';
     this.frameWrapper      = this.createFrameWrapper();
     this.frame             = this.createFrame();
     this.closeIframTimer   = -1;

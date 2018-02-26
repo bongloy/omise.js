@@ -1,19 +1,19 @@
-import { Client } from "./omise/client";
-import { Button, Card, Form, Frame } from "./omise/card";
-import * as legacy from "./omise/legacy";
+import { Client } from "./bongloy/client";
+import { Button, Card, Form, Frame } from "./bongloy/card";
+import * as legacy from "./bongloy/legacy";
 
-let Omise: Client = new Client();
+let Bongloy: Client = new Client();
 
-Omise.Card = {
+Bongloy.Card = {
   Button: Button,
   Form:   Form,
   Frame:  Frame,
 };
 
-const OmiseCardLegacy = new legacy.Card(Omise);
-OmiseCardLegacy.init();
+const BongloyCardLegacy = new legacy.Card(Bongloy);
+BongloyCardLegacy.init();
 
-if (!window.Omise) {
-  window.OmiseCard = OmiseCardLegacy;
-  window.Omise = Omise;
+if (!window.Bongloy) {
+  window.BongloyCard = BongloyCardLegacy;
+  window.Bongloy = Bongloy;
 }

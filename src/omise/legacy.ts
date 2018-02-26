@@ -24,15 +24,15 @@ interface LegacyConfiguration {
 export class Card {
 
   private trackId:              string;
-  private omiseScriptTag:       HTMLElement;
+  private bongloyScriptTag:       HTMLElement;
   private payForm:              HTMLFormElement;
   private defaultConfig:        Object;
   private targetButtonConfig:   Array<any>;
-  private Omise:                Client;
+  private Bongloy:                Client;
 
 
-  constructor(Omise: Client) {
-    this.Omise = Omise;
+  constructor(Bongloy: Client) {
+    this.Bongloy = Bongloy;
 
     this.defaultConfig = {};
     this.targetButtonConfig = [];
@@ -120,7 +120,7 @@ export class Card {
         }
       }
 
-      _self.Omise.createButton(payButton, formNode);
+      _self.Bongloy.createButton(payButton, formNode);
       allButtons.push(payButton);
     });
 
@@ -135,9 +135,9 @@ export class Card {
    * @param {Array} all buttons.
    */
   public injectCardIframe(allButtons: Array<any>) {
-    const iframeApp = document.getElementById('omise-inject-iframe-app');
+    const iframeApp = document.getElementById('bongloy-inject-iframe-app');
     if (!iframeApp) {
-      const cardFrame = this.Omise.createCardFrame();
+      const cardFrame = this.Bongloy.createCardFrame();
 
       // disable all button before iframe was finished loaded.
       allButtons.forEach(function(button) {
@@ -158,7 +158,7 @@ export class Card {
    * Close iframe app
    */
   public close() {
-    this.Omise.getCardFrame().close();
+    this.Bongloy.getCardFrame().close();
   }
 
   /**
@@ -167,7 +167,7 @@ export class Card {
    * @return {string} iframe app id.
    */
   public getIframeId() {
-    return this.Omise.getFrameId();
+    return this.Bongloy.getFrameId();
   }
 
 
@@ -177,7 +177,7 @@ export class Card {
    * @return {HTMLElement} node iframe.
    */
   public removeInjectIframe() {
-    return this.Omise.destroyCardFrame();
+    return this.Bongloy.destroyCardFrame();
   }
 
 
@@ -187,19 +187,19 @@ export class Card {
    * @return {string} track id.
    */
   private generateTrackId() {
-    this.trackId = 'omise-script-tag-' + new Date().getTime();
+    this.trackId = 'bongloy-script-tag-' + new Date().getTime();
     return this.trackId;
   }
 
 
   /**
-   * Find omise script tag and add track id for help to access later.
+   * Find bongloy script tag and add track id for help to access later.
    *
-   * @return {HTMLElement} omise script tag element.
+   * @return {HTMLElement} bongloy script tag element.
    */
-  private getOmiseScriptTag() {
-    if ( !this.omiseScriptTag ) {
-      let omiseScriptTag: any;
+  private getBongloyScriptTag() {
+    if ( !this.bongloyScriptTag ) {
+      let bongloyScriptTag: any;
       const scriptElements = document.getElementsByTagName('script');
 
       for (let i = 0, len = scriptElements.length; i < len; i++) {
@@ -207,15 +207,15 @@ export class Card {
 
         if (el.getAttribute('data-key') && el.getAttribute('data-amount')) {
           el.id = this.generateTrackId();
-          omiseScriptTag = el;
+          bongloyScriptTag = el;
           break;
         }
       }
 
-      this.omiseScriptTag = omiseScriptTag;
+      this.bongloyScriptTag = bongloyScriptTag;
     }
 
-    return this.omiseScriptTag;
+    return this.bongloyScriptTag;
   }
 
 
@@ -226,7 +226,7 @@ export class Card {
    */
   private getFormByTarget(target?: HTMLElement) {
     if ( ! this.payForm) {
-      let currentNode = target || this.getOmiseScriptTag();
+      let currentNode = target || this.getBongloyScriptTag();
 
       // travel DOM until found form tag
       while (currentNode && currentNode.tagName !== 'FORM') {
@@ -250,13 +250,13 @@ export class Card {
   };
 
   /**
-   * Create pay button and transfer data from omise script tag to button
+   * Create pay button and transfer data from bongloy script tag to button
    *
    * @return {Node} pay button element.
    */
   private createPayButtonFromScriptTag() {
-    const omiseScriptTag = this.getOmiseScriptTag();
-    const data = this.extractDataFromElement(omiseScriptTag);
+    const bongloyScriptTag = this.getBongloyScriptTag();
+    const data = this.extractDataFromElement(bongloyScriptTag);
 
     const payButton = document.createElement('button');
 
@@ -270,22 +270,22 @@ export class Card {
 
 
   /**
-   * Assume if we found `omise script tag` it mean we are in merchant view.
+   * Assume if we found `bongloy script tag` it mean we are in merchant view.
    *
    * @return {boolean} is in merchant view or not.
    */
   private isInMerchantView() {
-    return document.getElementById('Omise__CardJs__Iframe__App') ? false : true;
+    return document.getElementById('Bongloy__CardJs__Iframe__App') ? false : true;
   }
 
 
   /**
    * Automatic inject iframe in merchant view with auto generate pay button
-   * when found omise script tag
+   * when found bongloy script tag
    */
   private injectIframeWhenFoundScript() {
-    // if found omise script, then auto add pay button.
-    if (this.getOmiseScriptTag()) {
+    // if found bongloy script, then auto add pay button.
+    if (this.getBongloyScriptTag()) {
       const injectButton = this.injectPayButtonToForm();
       this.injectCardIframe([injectButton]);
     }
@@ -303,11 +303,11 @@ export class Card {
 
     if (formNode) {
       formNode.appendChild(button);
-      this.Omise.createButton(button, formNode);
+      this.Bongloy.createButton(button, formNode);
       return button;
     }
     else {
-      throw new Error('Missing from element for omise script tag');
+      throw new Error('Missing from element for bongloy script tag');
     }
   }
 

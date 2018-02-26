@@ -12,7 +12,7 @@ export class Client {
   public Card:      Card;
 
   constructor() {
-    this.easyXDM = easyXDM.noConflict("Omise");
+    this.easyXDM = easyXDM.noConflict("Bongloy");
   }
 
   public createRpc(callback: () => void): EasyXDMRpc {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-  <title>Omise.js - Browser Testing</title>
+  <title>Bongloy.js - Browser Testing</title>
   <link rel="stylesheet" href="vendors/mocha.css">
   <link rel="stylesheet" href="styles/test-output.css">
   <script src="vendors/jquery.js"></script>
@@ -37,7 +37,7 @@
 
   <div id="test-output">
     <form id="test-form">
-      <script type="text/javascript" src="/dist/omise.js"
+      <script type="text/javascript" src="/dist/bongloy.js"
               data-key="YOUR_PUBLIC_KEY"
               data-amount="99500"
               data-currency="thb"
@@ -50,10 +50,10 @@
 
   <script src="scripts/test-output.js"></script>
   <script>mocha.setup('bdd')</script>
-  <script src="unit/omise-card.spec.js"></script>
+  <script src="unit/bongloy-card.spec.js"></script>
   <script>
     mocha.checkLeaks();
-    mocha.globals(['devToolsOptions', 'jQuery', 'Omise', 'OmiseCard']);
+    mocha.globals(['devToolsOptions', 'jQuery', 'Bongloy', 'BongloyCard']);
     mocha.run();
   </script>
 </body>

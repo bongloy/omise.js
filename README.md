@@ -1,17 +1,17 @@
-# Omise.js
+# Bongloy.js
 
 ## Setup
 
-Insert Omise.js script into your page, you can select from our two CDNs
+Insert Bongloy.js script into your page, you can select from our two CDNs
 
 Primary CDN (Singapore)
 ```html
-<script src="https://cdn.omise.co/omise.js.gz"></script>
+<script src="https://cdn.bongloy.com/bongloy.js.gz"></script>
 ```
 
 Secondary CDN (Japan)
 ```html
-<script src="https://cdn2.omise.co/omise.js.gz"></script>
+<script src="https://cdn2.bongloy.com/bongloy.js.gz"></script>
 ```
 
 For uncompressed version, remove .gz extension.
@@ -20,14 +20,14 @@ For uncompressed version, remove .gz extension.
 #### Then set your public key in a `script` tag
 
 ```js
-Omise.setPublicKey("pkey_test_4xpip92iqmehclz4a4d");
+Bongloy.setPublicKey("pkey_test_4xpip92iqmehclz4a4d");
 ```
 
-That's it. You're good to send card data securely to Omise servers.
+That's it. You're good to send card data securely to Bongloy servers.
 
 ## Browser compatibility
 
-Omise.js relies on the excellent [easyXDM](https://github.com/oyvindkinsey/easyXDM) library for communication with the API. The following browsers are supported:
+Bongloy.js relies on the excellent [easyXDM](https://github.com/oyvindkinsey/easyXDM) library for communication with the API. The following browsers are supported:
 
 * Internet Explorer 8 and above.
 * Opera 9 and above.
@@ -50,25 +50,25 @@ With the following browsers operate in compatibility mode:
 
 ### setPublicKey(key)
 
-Setup your public key to authenticate with Omise API.
+Setup your public key to authenticate with Bongloy API.
 
 **Arguments:**
 
-* `key` (required) - key is the public keys that you can find in your [dashboard](https://dashboard.omise.co) once you're signed in.
+* `key` (required) - key is the public keys that you can find in your [dashboard](https://dashboard.bongloy.com) once you're signed in.
 
 ### createToken(type, object, callback)
 
-Create a token with the API. This token should be used in place of the card number when communicating with Omise API.
+Create a token with the API. This token should be used in place of the card number when communicating with Bongloy API.
 
 **Arguments:**
 
 * `type` (required) - type of token you want to create. For now this value must be `card`.
 * `object` (required) - a javascript object containing the 5 values required for a card:  `name`, `number`, `expiration_month`, `expiration_year`, `security_code`.
-* `callback`: (required) - a callback that will be triggered whenever the request with omise server completes (for both error and success). Two arguments will be passed back into the callback. The HTTP statusCode, like `200` for success or `400` for bad request. The second argument is the response from the Omise API.
+* `callback`: (required) - a callback that will be triggered whenever the request with bongloy server completes (for both error and success). Two arguments will be passed back into the callback. The HTTP statusCode, like `200` for success or `400` for bad request. The second argument is the response from the Bongloy API.
 
 ### Example
 
-The following example shows you how to send the card data to Omise API and get a token back.  
+The following example shows you how to send the card data to Bongloy API and get a token back.  
 If card authorization passed, `response.card.security_code_check` will be `true`. If it's `false` you should ask user to check the card details.  
 The Token is in `response.id`, send this token to your backend for creating a charge using your secret key.
 
@@ -85,7 +85,7 @@ var card = {
   "security_code": card_form.security_code.value
 };
 
-Omise.createToken("card", card, function (statusCode, response) {
+Bongloy.createToken("card", card, function (statusCode, response) {
   if (statusCode == 200) {
     // Success: send back the TOKEN_ID to your server to create a charge.
     // The TOKEN_ID can be found in `response.id`.
@@ -107,7 +107,7 @@ Omise.createToken("card", card, function (statusCode, response) {
   "object": "token",
   "id": "tokn_test_5086xl7c9k5rnx35qba",
   "livemode": false,
-  "location": "https://vault.omise.co/tokens/tokn_test_5086xl7c9k5rnx35qba",
+  "location": "https://vault.bongloy.com/tokens/tokn_test_5086xl7c9k5rnx35qba",
   "used": false,
   "card": {
     "object": "card",
@@ -135,7 +135,7 @@ Please note that it is important to leave `name` attribute in form `input`s to p
 
 ## How about validations?
 
-Omise.js doesn't validate credit card data before sending them to the API. But if the card isn't valid the API will send a message in the response containing the errors. If you need client side validation you can use something like the [jQuery Credit Card Validator](http://jquerycreditcardvalidator.com) library by [PawelDecowski](https://github.com/PawelDecowski).
+Bongloy.js doesn't validate credit card data before sending them to the API. But if the card isn't valid the API will send a message in the response containing the errors. If you need client side validation you can use something like the [jQuery Credit Card Validator](http://jquerycreditcardvalidator.com) library by [PawelDecowski](https://github.com/PawelDecowski).
 
 
 ## LIBRARY DEVELOPMENT 

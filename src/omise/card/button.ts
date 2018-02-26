@@ -31,10 +31,10 @@ export class Button {
     amount:               0,
     currency:             "THB",
     image:                "",
-    frameLabel:           "Omise",
+    frameLabel:           "Bongloy",
     frameDescription:     "",
     submitLabel:          "Checkout",
-    buttonLabel:          "Pay with Omise",
+    buttonLabel:          "Pay with Bongloy",
     location:             "no",
     note:                 "no",
     submitFormTarget:     "",
@@ -125,23 +125,23 @@ export class Button {
 
   public submitToken(token: string, note: string) {
     // create input for store `token` if it doesn't exists.
-    if ( ! this.formNode["omiseToken"]) {
-      const inputOmiseToken = document.createElement('input');
-      inputOmiseToken.setAttribute('type', 'hidden');
-      inputOmiseToken.setAttribute('name', 'omiseToken');
-      this.formNode.appendChild(inputOmiseToken);
+    if ( ! this.formNode["bongloyToken"]) {
+      const inputBongloyToken = document.createElement('input');
+      inputBongloyToken.setAttribute('type', 'hidden');
+      inputBongloyToken.setAttribute('name', 'bongloyToken');
+      this.formNode.appendChild(inputBongloyToken);
     }
 
     // create input for store `note` if it doesn't exists.
-    if ( ! this.formNode["omiseNote"]) {
-      const inputOmiseNote = document.createElement('input');
-      inputOmiseNote.setAttribute('type', 'hidden');
-      inputOmiseNote.setAttribute('name', 'omiseNote');
-      this.formNode.appendChild(inputOmiseNote);
+    if ( ! this.formNode["bongloyNote"]) {
+      const inputBongloyNote = document.createElement('input');
+      inputBongloyNote.setAttribute('type', 'hidden');
+      inputBongloyNote.setAttribute('name', 'bongloyNote');
+      this.formNode.appendChild(inputBongloyNote);
     }
 
-    this.formNode["omiseToken"].value = token;
-    this.formNode["omiseNote"].value = note;
+    this.formNode["bongloyToken"].value = token;
+    this.formNode["bongloyNote"].value = note;
     this.formNode.submit();
   }
 
