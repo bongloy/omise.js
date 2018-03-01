@@ -5,5 +5,5 @@ interface Config {
 
 export var config: Config = {
   vaultUrl: "https://api.bongloy.com",
-  assetUrl: "https://cdn.bongloy.com"
+  assetUrl: "https://js.bongloy.com"
 };

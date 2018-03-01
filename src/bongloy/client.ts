@@ -7,6 +7,7 @@ export class Client {
   private rpc:     EasyXDMRpc;
 
   public publicKey: string;
+  public config = config;
 
   constructor() {
     this.easyXDM = easyXDM.noConflict("Bongloy");
@@ -29,8 +30,8 @@ export class Client {
     }, 10000);
 
     this.rpc = new this.easyXDM.Rpc({
-      remote:  config.vaultUrl + "/provider",
-      swf:     config.assetUrl + "/easyxdm.swf",
+      remote:  this.config.vaultUrl + "/provider",
+      swf:     this.config.assetUrl + "/easyxdm.swf",
       onReady: function() {
         clearTimeout(tm);
       }

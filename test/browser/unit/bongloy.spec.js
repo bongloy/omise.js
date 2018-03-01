@@ -20,6 +20,11 @@ describe('Bongloy.js - Data testing', function() {
   var _windowMessageHandler;
 
   before(function() {
+    Bongloy.config = {
+      vaultUrl: "http://api.lvh.me:3000",
+      assetUrl: "http://js.lvh.me:3000"
+    }
+
     Bongloy.setPublishableKey('pk_test_1044d8940f2c0067b6977bb3945394d3660d9487a638f882a0bd7e271f8583db');
   });
 
