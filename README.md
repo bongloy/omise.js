@@ -1,5 +1,7 @@
 # Bongloy.js
 
+Bongloy.js was inspired from [Omise.js](https://github.com/omise/omise.js). Thanks to the Omise team for such a great library.
+
 ## Setup
 
 Insert Bongloy.js script into your page
@@ -72,7 +74,7 @@ var card_form = document.getElementById("card");
 var card = {
   "name": card_form.holder_name.value,
   "number": card_form.number.value,
-  "exp_mont": card_form.expiration_month.value,
+  "exp_month": card_form.expiration_month.value,
   "exp_year": card_form.expiration_year.value,
   "cvc": card_form.security_code.value
 };
@@ -83,8 +85,7 @@ Bongloy.createToken("card", card, function (statusCode, response) {
     // The TOKEN_ID can be found in `response.id`.
   } else {
     // Error: display an error message. Note that `response.message` contains
-    // a preformatted error message. Also note that `response.code` will be
-    // "invalid_card" in case of validation error on the card.
+    // a preformatted error message.
 
     // Example Error displaying
     alert(response.code+": "+response.message);
