@@ -14,7 +14,7 @@ Primary CDN (Singapore)
 #### Then set your public key in a `script` tag
 
 ```js
-Bongloy.setPublicKey("pk_test_1044d8940f2c0067b6977bb3945394d3660d9487a638f882a0bd7e271f8583db");
+Bongloy.setPublishableKey("pk_test_2411c55a75ad6d004eaaf240f99b577dec6d6630789c06a23639967ae3c10572");
 ```
 
 That's it. You're good to send card data securely to Bongloy servers.
@@ -42,7 +42,7 @@ With the following browsers operate in compatibility mode:
 
 ## API
 
-### setPublicKey(key)
+### setPublishableKey(key)
 
 Setup your public key to authenticate with Bongloy API.
 

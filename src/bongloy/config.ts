@@ -4,6 +4,6 @@ interface Config {
 }
 
 export var config: Config = {
-  vaultUrl: "http://localhost:3000",
-  assetUrl: "http://localhost:3000"
+  vaultUrl: "https://api.bongloy.com",
+  assetUrl: "https://cdn.bongloy.com"
 };

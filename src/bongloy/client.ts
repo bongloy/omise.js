@@ -45,6 +45,7 @@ export class Client {
     this.publicKey = key;
     return this.publicKey;
   }
+  public setPublishableKey = this.setPublicKey.bind(this);
 
   public createToken(as: string,
                      attributes: token.Attributes,

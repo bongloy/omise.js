@@ -20,7 +20,7 @@ describe('Bongloy.js - Data testing', function() {
   var _windowMessageHandler;
 
   before(function() {
-    Bongloy.setPublicKey('pk_test_1044d8940f2c0067b6977bb3945394d3660d9487a638f882a0bd7e271f8583db');
+    Bongloy.setPublishableKey('pk_test_1044d8940f2c0067b6977bb3945394d3660d9487a638f882a0bd7e271f8583db');
   });
 
   it('Should create token from card information properly', function(done) {
