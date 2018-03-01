@@ -1,8 +1,8 @@
 {
-  "name": "omise.js",
+  "name": "bongloy.js",
   "version": "2.0.0",
-  "description": "Omise Browser SDK",
-  "main": "omise.js",
+  "description": "Bongloy Browser SDK",
+  "main": "bongloy.js",
   "scripts": {
     "start": "webpack -w",
     "dev-server": "webpack-dev-server --hot --colors --progress",
@@ -10,19 +10,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/omise/omise.js.git"
+    "url": "git+https://github.com/bongloy/bongloy.js.git"
   },
   "keywords": [
-    "omise",
+    "bongloy",
+    "bongloy.js",
     "browser",
     "sdk"
   ],
-  "author": "Robin Clart <robin@omise.co>",
+  "author": "David Wilkie <dwilkie@bongloy.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/omise/omise.js/issues"
+    "url": "https://github.com/bongloy/bongloy.js/issues"
   },
-  "homepage": "https://github.com/omise/omise.js#readme",
+  "homepage": "https://github.com/bongloy/bongloy.js#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.11",
     "source-map-loader": "^0.1.5",

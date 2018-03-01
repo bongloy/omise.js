@@ -1,33 +1,27 @@
-# Omise.js
+# Bongloy.js
+
+Bongloy.js was inspired from [Omise.js](https://github.com/omise/omise.js). Thanks to the Omise team for such a great library.
 
 ## Setup
 
-Insert Omise.js script into your page, you can select from our two CDNs
+Insert Bongloy.js script into your page
 
 Primary CDN (Singapore)
 ```html
-<script src="https://cdn.omise.co/omise.js.gz"></script>
+<script src="https://js.bongloy.com/v3/"></script>
 ```
-
-Secondary CDN (Japan)
-```html
-<script src="https://cdn2.omise.co/omise.js.gz"></script>
-```
-
-For uncompressed version, remove .gz extension.
-
 
 #### Then set your public key in a `script` tag
 
 ```js
-Omise.setPublicKey("pkey_test_4xpip92iqmehclz4a4d");
+Bongloy.setPublicKey("pk_test_1044d8940f2c0067b6977bb3945394d3660d9487a638f882a0bd7e271f8583db");
 ```
 
-That's it. You're good to send card data securely to Omise servers.
+That's it. You're good to send card data securely to Bongloy servers.
 
 ## Browser compatibility
 
-Omise.js relies on the excellent [easyXDM](https://github.com/oyvindkinsey/easyXDM) library for communication with the API. The following browsers are supported:
+Bongloy.js relies on the excellent [easyXDM](https://github.com/oyvindkinsey/easyXDM) library for communication with the API. The following browsers are supported:
 
 * Internet Explorer 8 and above.
 * Opera 9 and above.
@@ -50,26 +44,26 @@ With the following browsers operate in compatibility mode:
 
 ### setPublicKey(key)
 
-Setup your public key to authenticate with Omise API.
+Setup your public key to authenticate with Bongloy API.
 
 **Arguments:**
 
-* `key` (required) - key is the public keys that you can find in your [dashboard](https://dashboard.omise.co) once you're signed in.
+* `key` (required) - key is the public keys that you can find in your [dashboard](https://dashboard.bongloy.com) once you're signed in.
 
 ### createToken(type, object, callback)
 
-Create a token with the API. This token should be used in place of the card number when communicating with Omise API.
+Create a token with the API. This token should be used in place of the card number when communicating with Bongloy API.
 
 **Arguments:**
 
 * `type` (required) - type of token you want to create. For now this value must be `card`.
-* `object` (required) - a javascript object containing the 5 values required for a card:  `name`, `number`, `expiration_month`, `expiration_year`, `security_code`.
-* `callback`: (required) - a callback that will be triggered whenever the request with omise server completes (for both error and success). Two arguments will be passed back into the callback. The HTTP statusCode, like `200` for success or `400` for bad request. The second argument is the response from the Omise API.
+* `object` (required) - a javascript object containing the 5 values required for a card:  `name`, `number`, `exp_month`, `exp_year`, `cvc`.
+* `callback`: (required) - a callback that will be triggered whenever the request with bongloy server completes (for both error and success). Two arguments will be passed back into the callback. The HTTP statusCode, like `201` for success or `422` for bad request. The second argument is the response from the Bongloy API.
 
 ### Example
 
-The following example shows you how to send the card data to Omise API and get a token back.  
-If card authorization passed, `response.card.security_code_check` will be `true`. If it's `false` you should ask user to check the card details.  
+The following example shows you how to send the card data to Bongloy API and get a token back.  
+If card authorization passed, `response.card.cvc_check` will be `true`. If it's `false` you should ask user to check the card details.  
 The Token is in `response.id`, send this token to your backend for creating a charge using your secret key.
 
 ```js
@@ -80,19 +74,18 @@ var card_form = document.getElementById("card");
 var card = {
   "name": card_form.holder_name.value,
   "number": card_form.number.value,
-  "expiration_month": card_form.expiration_month.value,
-  "expiration_year": card_form.expiration_year.value,
-  "security_code": card_form.security_code.value
+  "exp_month": card_form.expiration_month.value,
+  "exp_year": card_form.expiration_year.value,
+  "cvc": card_form.security_code.value
 };
 
-Omise.createToken("card", card, function (statusCode, response) {
-  if (statusCode == 200) {
+Bongloy.createToken("card", card, function (statusCode, response) {
+  if (statusCode == 201) {
     // Success: send back the TOKEN_ID to your server to create a charge.
     // The TOKEN_ID can be found in `response.id`.
   } else {
     // Error: display an error message. Note that `response.message` contains
-    // a preformatted error message. Also note that `response.code` will be
-    // "invalid_card" in case of validation error on the card.
+    // a preformatted error message.
 
     // Example Error displaying
     alert(response.code+": "+response.message);
@@ -104,29 +97,35 @@ Omise.createToken("card", card, function (statusCode, response) {
 
 ```js
 {
-  "object": "token",
-  "id": "tokn_test_5086xl7c9k5rnx35qba",
-  "livemode": false,
-  "location": "https://vault.omise.co/tokens/tokn_test_5086xl7c9k5rnx35qba",
-  "used": false,
-  "card": {
-    "object": "card",
-    "id": "card_test_5086xl7amxfysl0ac5l",
-    "livemode": false,
-    "country": "us",
-    "city": "Bangkok",
-    "postal_code": "10320",
-    "financing": "",
-    "last_digits": "4242",
-    "brand": "Visa",
-    "expiration_month": 10,
-    "expiration_year": 2018,
-    "fingerprint": "mKleiBfwp+PoJWB/ipngANuECUmRKjyxROwFW5IO7TM=",
-    "name": "Somchai Prasert",
-    "security_code_check": true,
-    "created": "2015-06-02T05:41:46Z"
+  "id":"1f491f39-b732-4979-ac58-5ee613094852",
+  "used":false,
+  "livemode":false,
+  "object":"token",
+  "card":{
+    "id":"18ee0d88-4b07-4208-bbd0-683b633fda60",
+    "exp_month":12,
+    "exp_year":2020,
+    "name":"Ratchagarn Naewbuntad",
+    "address_line1":null,
+    "address_line2":null,
+    "address_city":null,
+    "address_state":null,
+    "address_zip":null,
+    "address_country":null,
+    "brand":"visa",
+    "fingerprint":null,
+    "country":null,
+    "cvc_check":"unchecked",
+    "address_line1_check":"unchecked",
+    "address_zip_check":"unchecked",
+    "object":"card",
+    "last4":"4242",
+    "created":1519875653,
+    "customer":null
   },
-  "created": "2015-06-02T05:41:46Z"
+  "type":"card",
+  "created":1519875653,
+  "client_ip":"127.0.0.1"
 }
 
 ```
@@ -135,7 +134,7 @@ Please note that it is important to leave `name` attribute in form `input`s to p
 
 ## How about validations?
 
-Omise.js doesn't validate credit card data before sending them to the API. But if the card isn't valid the API will send a message in the response containing the errors. If you need client side validation you can use something like the [jQuery Credit Card Validator](http://jquerycreditcardvalidator.com) library by [PawelDecowski](https://github.com/PawelDecowski).
+Bongloy.js doesn't validate credit card data before sending them to the API. But if the card isn't valid the API will send a message in the response containing the errors. If you need client side validation you can use something like the [jQuery Credit Card Validator](http://jquerycreditcardvalidator.com) library by [PawelDecowski](https://github.com/PawelDecowski).
 
 
 ## LIBRARY DEVELOPMENT 

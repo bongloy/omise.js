@@ -9,6 +9,6 @@
   "files": [
     "./typings/window.d.ts",
     "./typings/easyXDM.d.ts",
-    "./src/omise.ts"
+    "./src/bongloy.ts"
   ]
 }
