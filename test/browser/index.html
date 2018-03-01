@@ -36,24 +36,15 @@
   <div id="mocha"></div>
 
   <div id="test-output">
-    <form id="test-form">
-      <script type="text/javascript" src="/dist/bongloy.js"
-              data-key="YOUR_PUBLIC_KEY"
-              data-amount="99500"
-              data-currency="thb"
-              data-button-label="Pay now"
-              data-frame-label="Example 1"
-              data-submit-label="Checkout">
-      </script>
-    </form>
   </div>
 
   <script src="scripts/test-output.js"></script>
+  <script src="/dist/bongloy.js"></script>
   <script>mocha.setup('bdd')</script>
-  <script src="unit/bongloy-card.spec.js"></script>
+  <script src="unit/bongloy.spec.js"></script>
   <script>
     mocha.checkLeaks();
-    mocha.globals(['devToolsOptions', 'jQuery', 'Bongloy', 'BongloyCard']);
+    mocha.globals(['devToolsOptions', 'jQuery', 'Bongloy']);
     mocha.run();
   </script>
 </body>

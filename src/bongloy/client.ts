@@ -1,15 +1,12 @@
 import "../../vendor/easyXDM";
-import { Button, Card, Form, Frame } from "./card";
 import { config } from "./config";
 import * as token from "./token";
 
 export class Client {
   private easyXDM: EasyXDM;
-  private frame:   Frame;
   private rpc:     EasyXDMRpc;
 
   public publicKey: string;
-  public Card:      Card;
 
   constructor() {
     this.easyXDM = easyXDM.noConflict("Bongloy");
@@ -66,36 +63,5 @@ export class Client {
     }, function(event: token.CreateEvent){
       handler(event.data.status, event.data.data);
     });
-  }
-
-  public createButton(buttonNode: HTMLElement, formNode: HTMLFormElement): Button {
-    return new Button(this, buttonNode, formNode);
-  }
-
-  public createForm(proxy: any): Form {
-    return new Form(this, proxy);
-  }
-
-  public createCardFrame(): Frame {
-    this.frame = this.frame || new Frame(this);
-    return this.frame
-  }
-
-  public getCardFrame(): Frame {
-    return this.frame;
-  }
-
-  public getFrameId(): string {
-    return this.getCardFrame() ? this.getCardFrame().getFrameWrapperId() : null;
-  }
-
-  public destroyCardFrame(): any {
-    this.getCardFrame().destroy();
-    this.frame = null;
-    return null;
-  }
-
-  public openAndConfigureCardForm(originButton: Button) {
-    this.createCardFrame().openAndConfigureForm(originButton);
   }
 }

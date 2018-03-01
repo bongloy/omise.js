@@ -14,10 +14,11 @@
   },
   "keywords": [
     "bongloy",
+    "bongloy.js",
     "browser",
     "sdk"
   ],
-  "author": "Robin Clart <robin@bongloy.com>",
+  "author": "David Wilkie <dwilkie@bongloy.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bongloy/bongloy.js/issues"
