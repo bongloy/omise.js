@@ -25,7 +25,7 @@ describe('Bongloy.js - Data testing', function() {
       assetUrl: "http://js.lvh.me:3000"
     }
 
-    Bongloy.setPublishableKey('pk_test_1044d8940f2c0067b6977bb3945394d3660d9487a638f882a0bd7e271f8583db');
+    Bongloy.setPublishableKey('pk_test_d7c12df3795b8c6f9e2ede45e8b57d292fcf239c5becec2daea3f6c3ba806d09');
   });
 
   it('Should create token from card information properly', function(done) {
@@ -56,10 +56,10 @@ describe('Bongloy.js - Data testing', function() {
       cvc: '092'
     };
 
-    Bongloy.createToken('card', cardInfomation, function(code, resp) {
+    Bongloy.card.createToken(cardInfomation, function(code, resp) {
       expect(code).to.equal(422);
-      expect(resp.error.card[0]).to.equal('is invalid');
-      expect(typeof resp.error.message).to.equal('object');
+      expect(resp.error.message).to.match(/is invalid/);
+      expect(typeof resp.error).to.equal('object');
       done();
     });
   });
