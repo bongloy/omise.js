@@ -7,10 +7,18 @@ export class Client {
   private rpc:     EasyXDMRpc;
 
   public publicKey: string;
+  public card: object;
   public config = config;
 
   constructor() {
     this.easyXDM = easyXDM.noConflict("Bongloy");
+    let self = this;
+    this.card = {
+      createToken: function() {
+        let args = [].slice.call(arguments);
+        self.createToken.apply(self, ["card", ...args]);
+      }
+    };
   }
 
   public createRpc(callback: () => void): EasyXDMRpc {
