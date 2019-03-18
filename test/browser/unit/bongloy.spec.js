@@ -25,7 +25,7 @@ describe('Bongloy.js - Data testing', function() {
       assetUrl: "http://js.lvh.me:3000"
     }
 
-    Bongloy.setPublishableKey('pk_test_d7c12df3795b8c6f9e2ede45e8b57d292fcf239c5becec2daea3f6c3ba806d09');
+    Bongloy.setPublishableKey("pk_test_c14c0f375baabeeceeafc00867e8288b4f62f8c84f181d6c6ecf62f798d5a33b");
   });
 
   it('Should create token from card information properly', function(done) {
@@ -33,7 +33,7 @@ describe('Bongloy.js - Data testing', function() {
 
     var cardInfomation = {
       name: 'Ratchagarn Naewbuntad',
-      number: '4242424242424242',
+      number: '6200000000000005',
       exp_month: '12',
       exp_year: '2020',
       cvc: '123'
@@ -50,9 +50,9 @@ describe('Bongloy.js - Data testing', function() {
   it('Should handler error from card information properly', function(done) {
     var cardInfomation = {
       name: 'Ratchagarn Naewbuntad',
-      number: '424242424242424',
-      exp_month: '13',
-      exp_year: '2099',
+      number: '62000000000000',
+      exp_month: '3',
+      exp_year: '2000',
       cvc: '092'
     };
 
