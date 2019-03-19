@@ -7,6 +7,7 @@ export class Client {
   private rpc:     EasyXDMRpc;
 
   public publicKey: string;
+  public bongloyAccount: string;
   public card: object;
   public config = config;
 
@@ -50,8 +51,9 @@ export class Client {
     return this.rpc;
   }
 
-  public setPublicKey(key: string): string {
+  public setPublicKey(key: string, options: any = { bongloyAccount: null }): string {
     this.publicKey = key;
+    this.bongloyAccount = options.bongloyAccount;
     return this.publicKey;
   }
   public setPublishableKey = this.setPublicKey.bind(this);
@@ -59,6 +61,7 @@ export class Client {
   public createToken(as: string,
                      attributes: token.Attributes,
                      handler: (status: number, attributes: token.Attributes) => void) {
+    let headers: Object = { bongloyAccount: this.bongloyAccount };
     let data: token.Attributes = {};
 
     data[as] = attributes;
@@ -68,7 +71,7 @@ export class Client {
         code:    "rpc_error",
         message: "unable to connect to provider after timeout"
       });
-    }).createToken(this.publicKey, data, function(response: token.Response) {
+    }).createToken(this.publicKey, data, headers, function(response: token.Response) {
       handler(response.status, response.data);
     }, function(event: token.CreateEvent){
       handler(event.data.status, event.data.data);

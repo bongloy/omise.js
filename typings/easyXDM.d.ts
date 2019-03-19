@@ -11,7 +11,7 @@ declare interface EasyXDM {
 declare interface EasyXDMRpc {
   new(transportConfig: EasyXDMTransportConfig, jsonRpcConfig: EasyXDMJsonRpcConfig): EasyXDMRpc
   destroy(): void;
-  createToken(key: string, data: Object, onSuccess: Function, onError: Function): void;
+  createToken(key: string, data: Object, headers: Object, onSuccess: Function, onError: Function): void;
 }
 
 declare interface EasyXDMTransportConfig {
