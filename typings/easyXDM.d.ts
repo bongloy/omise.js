@@ -9,6 +9,7 @@ declare interface EasyXDM {
 }
 
 declare interface EasyXDMRpc {
+  generateQRCode(publicKey: string, client_secret: string, headers: Object, arg3: (response: Object) => void, arg4: (event: "") => void): void;
   new(transportConfig: EasyXDMTransportConfig, jsonRpcConfig: EasyXDMJsonRpcConfig): EasyXDMRpc
   destroy(): void;
   createToken(key: string, data: Object, headers: Object, onSuccess: Function, onError: Function): void;
