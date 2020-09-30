@@ -1,7 +1,7 @@
 import "../../vendor/easyXDM";
 import { config } from "./config";
 import * as token from "./token";
-import * as qr_code from "./qr_code";
+import * as qrCode from "./qr_code";
 
 export class Client {
   private easyXDM: EasyXDM;
@@ -48,7 +48,7 @@ export class Client {
     }, {
       remote: {
         createToken: {},
-        generateQRCode: {}
+        confirmQRCodePayment: {}
       }
     });
 
@@ -82,15 +82,17 @@ export class Client {
     });
   }
 
-  public generateQRCode(client_secret: string, handler: (status: number, attributes: qr_code.Attributes) => void) {
+  public confirmQRCodePayment(clientSecret: string, handler: (status: number, attributes: qrCode.Attributes) => void) {
     let headers: Object = { bongloyAccount: this.bongloyAccount };
+    let data: qrCode.Attributes = {};
+    data["client_secret"] = clientSecret;
 
     this.createRpc(function() {
       handler(0, {
         code:    "rpc_error",
         message: "unable to connect to provider after timeout"
       });
-    }).generateQRCode(this.publicKey, client_secret, headers, function(response: qr_code.Response) {
+    }).confirmQRCodePayment(this.publicKey, data, headers, function(response: qrCode.Response) {
       handler(response.status, response.data);
     }, function(event: ""){
     });
